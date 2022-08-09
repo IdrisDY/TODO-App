@@ -51,19 +51,21 @@ setNom('')
      
 
   return (
-    <div>
+   <>
+    <div className= 'input-content'>
     
-    <>
+   
     <form onSubmit={handleSubmit} className='form-todo'>
       <input className='inputodo' type='text' value={nom} onChange={e=> setNom(e.target.value)} placeholder='Create a new Todo'/>
     </form>
-
-    </>
+</div>
+   <div className='todo-content'>
     { todos.map(todo=>
       < Todo  todo = {todo} dispatchButton={dispatch}/>)
     }
-
-    </div>
+</div>
+    
+    </>
   )
 }
 

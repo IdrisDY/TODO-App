@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const Todo = ({todo}) => {
+export const Todo = ({todo,theme}) => {
   return (
-    <div>
+    <div className = 'todo-main' style={{background:theme}}>
       <input type='radio' />
 <p> {todo.name}</p>
     </div>

@@ -31,7 +31,7 @@ export const MainTodo = () => {
 <button onClick ={handleTheme} > <img src= {theme==='light'?moon:sun} alt='toggle dark/light theme' />
 </button>
     </div>
- <Todos/>
+ <Todos  />
     </Topdiv>
    
 
