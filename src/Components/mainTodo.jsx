@@ -7,10 +7,10 @@ import Todos from './createTodo'
 import { Todo } from './Todo'
 export const MainTodo = () => {
    const [theme, setTheme] = useState('light')
-   const [changeImg , setChangeImg]  = useState(false)
+
    const Styleddiv = styled.div`
-      color:${props=>props.theme.color};
-   background-color:${props=>props.theme.background};
+      ${'' /* color:${props=>props.theme.color};
+   background-color:${props=>props.theme.background}; */}
    `;
    const Topdiv = styled.div`
    background-image: url(${props=>props.theme.mobgimage}) ;
@@ -31,13 +31,14 @@ export const MainTodo = () => {
 <button onClick ={handleTheme} > <img src= {theme==='light'?moon:sun} alt='toggle dark/light theme' />
 </button>
     </div>
- <Todos  />
+
     </Topdiv>
    
 
 <Styleddiv className='todo-bottom'> 
-h
+<Todos  />
 </Styleddiv>
+
 
     </div>
     </ThemeProvider>

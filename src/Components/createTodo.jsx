@@ -51,7 +51,7 @@ setNom('')
      
 
   return (
-   <>
+   <div className='todo-inp-container'>
     <div className= 'input-content'>
     
    
@@ -65,7 +65,7 @@ setNom('')
     }
 </div>
     
-    </>
+    </div>
   )
 }
 
