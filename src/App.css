@@ -18,7 +18,7 @@ height: 25vh;
 background-size: cover;
 display: flex;
 justify-content: space-around;
-padding: 3em 1.5em 3em 1.5em;
+padding: 0em 1.5em 3em 1.5em;
 flex-direction: column;
 }
 .todo-top p{
@@ -29,9 +29,6 @@ flex-direction: column;
 
 }
 .todo-bottom{
-  position: relative;
-  height: 70vh;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +74,7 @@ width: 100%;
 }
 .todo-inp-container{
 position: absolute;
-top: -20%;
+top: 50%;
 display: flex;
 flex-direction: column;
 gap: 2em;

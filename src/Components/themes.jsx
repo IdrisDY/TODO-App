@@ -16,7 +16,7 @@ export const darkTheme = {
 }
 export const GlobalStyle = createGlobalStyle`
 
-.todo-bottom{
+body{
    color:${props=>props.theme.color};
    background-color:${props=>props.theme.background}; 
 
