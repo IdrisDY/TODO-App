@@ -14,7 +14,7 @@ button{
 }
 .todo-top{
   background-repeat: no-repeat;
-height: 30vh;
+height: 25vh;
 background-size: cover;
 display: flex;
 justify-content: space-around;
@@ -29,7 +29,12 @@ flex-direction: column;
 
 }
 .todo-bottom{
+  position: relative;
   height: 70vh;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .todo-top-toggle{
   display: flex;
@@ -53,16 +58,35 @@ width: 100%;
 
 }
 .todo-content{
-  position: absolute;
-  
+  display: flex;
+  flex-direction: column;
+  border-radius: .3em;
 }
 .todo-main{
-  background:black;
+  display: flex;
+  padding: .5em 1em;
+  border-bottom:  1px solid hsl(236, 9%, 61%) ;
+  justify-content: space-between;
+}
+.checktodo{
+  display: flex;
+  gap: .5em;
+}
+.btnclose{
   color: white;
 }
 .todo-inp-container{
-  position: absolute;
-  top: 30%;
+position: absolute;
+top: -20%;
+display: flex;
+flex-direction: column;
+gap: 2em;
+width: 80%;
+}
+.todopart{
   display: flex;
-  justify-self: center;
+  justify-content: center;
+  gap: 1em;
+  padding: .5em 1em;
+  border-radius: .3em;
 }

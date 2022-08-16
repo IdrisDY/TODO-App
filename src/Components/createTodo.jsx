@@ -49,6 +49,7 @@ dispatch({type:ACTION.ADDTODO , payload:{name:nom}})
 setNom('')
       }
      
+      console.log(todos.length)
 
   return (
    <div className='todo-inp-container'>
@@ -61,10 +62,16 @@ setNom('')
 </div>
    <div className='todo-content'>
     { todos.map(todo=>
-      < Todo  todo = {todo} dispatchButton={dispatch}/>)
+      < Todo key={todo.id} todo = {todo} dispatchButton={dispatch} todoLength= {todos.length}/>)
     }
 </div>
     
+    <div className='todopart'>
+      <button> All</button>
+      <button> Active</button>
+      <button> Completed</button>
+
+    </div>
     </div>
   )
 }
