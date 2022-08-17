@@ -87,3 +87,15 @@ width: 80%;
   padding: .5em 1em;
   border-radius: .3em;
 }
+.checkicon{
+display: flex;
+align-self: center;
+}
+.check-cover{
+  background: linear-gradient(to right ,rgb(27, 94, 218,.5) ,rgb(146, 68, 146));
+  border-radius: 50%;
+display: flex;
+place-items: center;
+padding: 0em .2em;
+height: 16px;
+}
