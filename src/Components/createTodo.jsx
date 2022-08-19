@@ -22,7 +22,7 @@ const Todos = () => {
    case ACTION.TOGGLETODO : 
    return state.map(todo=>{
     if(todo.id === action.payload.id){
-      return{...todo, complete:!todo.complete}
+      return{...todo, complete:todo.complete?false:true}
     }
    })
 case ACTION.DELETETODO:
@@ -30,11 +30,7 @@ case ACTION.DELETETODO:
   default:
     return state
 }     
-
         }
-
-
-
       function newTodo(name){
          return{
             id:Date.now(),
@@ -49,8 +45,6 @@ dispatch({type:ACTION.ADDTODO , payload:{name:nom}})
 setNom('')
       }
      
-      console.log(todos.length)
-
   return (
    <div className='todo-inp-container'>
     <div className= 'input-content'>
@@ -64,8 +58,13 @@ setNom('')
     { todos.map(todo=>
       < Todo key={todo.id} todo = {todo} dispatchButton={dispatch} todoLength= {todos.length}/>)
     }
+    { todos.length>0 && 
+    <div className='items-left'>
+      <span> {todos.length} items left</span>
+     <button> Clear Completed</button>
+    </div>}
+
 </div>
-    
     <div className='todopart'>
       <button> All</button>
       <button> Active</button>

@@ -39,10 +39,6 @@ export const MainTodo = () => {
 
 <div className='todo-bottom'> 
 <Todos  />
-<div>
-      <span> items left</span>
-    </div>
-
 </div>
 
 

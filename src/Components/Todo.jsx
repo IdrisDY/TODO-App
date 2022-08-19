@@ -4,9 +4,10 @@ import check from '../assets/images/icon-check.svg'
 export const Todo = ({todo,dispatchButton,todoLength}) => {
   const themes = useTheme()
   const [checkClick, setCheckClick]= useState(false)
-console.log(themes);
 function handleClick(){
   checkClick?setCheckClick(false):setCheckClick(true)
+  dispatchButton({type:'toggletodo',payload:{id:todo.id}})
+console.log(todo);  
 }
   return (
     <>
