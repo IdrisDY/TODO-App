@@ -60,7 +60,7 @@ setNom('')
     }
     { todos.length>0 && 
     <div className='items-left'>
-      <span> {todos.length} items left</span>
+      <span> {todos.length} {todos.length===1?'item left':'items left'}</span>
      <button> Clear Completed</button>
     </div>}
 
