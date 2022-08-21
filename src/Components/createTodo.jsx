@@ -22,7 +22,7 @@ const Todos = () => {
    case ACTION.TOGGLETODO : 
    return state.map(todo=>{
     if(todo.id === action.payload.id){
-      return{...todo, complete:todo.complete?false:true}
+      return{...todo, complete:!todo.complete}
     }
    })
 case ACTION.DELETETODO:
