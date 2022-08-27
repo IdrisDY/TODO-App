@@ -5,7 +5,10 @@ import { Todo } from './Todo'
 export const ACTION = {
   ADDTODO:'addtodo',
   TOGGLETODO:'toggletodo',
-  DELETETODO:'DELETETODO'
+  DELETETODO:'deletetodo',
+  CLEAR:'clearall',
+  COMPLETE:'completed',
+  ALL:'seeall'
    }
 
 const Todos = () => {
@@ -13,22 +16,28 @@ const Todos = () => {
 
   const [todos, dispatch] = useReducer(reducer, []) 
 
-       function reducer(state, action){
+       function reducer(todos, action){
         // here action is an object here  with a type prop
-        console.log(action)
+        
         switch(action.type){
          case ACTION.ADDTODO:
-   return [...state, newTodo(action.payload.name)];
-   case ACTION.TOGGLETODO : 
-   return state.map(todo=>{
+   return [...todos, newTodo(action.payload.name)];
+   case ACTION.TOGGLETODO: 
+   return todos.map(todo=>{
     if(todo.id === action.payload.id){
+      console.log(todo);
       return{...todo, complete:!todo.complete}
     }
+    return todo
    })
 case ACTION.DELETETODO:
-  return state.filter(todo=>todo.id !== action.payload.id)
+  return todos.filter(todo=>todo.id !== action.payload.id);
+  case ACTION.CLEAR:
+    return( todos.filter(todo=>!todo.complete)  )
+    case ACTION.COMPLETE: return( todos.filter(todo=>todo.complete)  )
+    case ACTION.ALL:return todos
   default:
-    return state
+    return todos
 }     
         }
       function newTodo(name){
@@ -38,11 +47,19 @@ case ACTION.DELETETODO:
             complete:false
          }
       }
+      console.log(todos)
      const handleSubmit=(e)=>{
       e.preventDefault()
       console.log(e)
 dispatch({type:ACTION.ADDTODO , payload:{name:nom}})
 setNom('')
+      }
+      function clearAll(){
+        dispatch({type:ACTION.CLEAR})
+      }
+      function seeCompleted (){
+        dispatch({type:ACTION.COMPLETE})
+
       }
      
   return (
@@ -55,20 +72,23 @@ setNom('')
     </form>
 </div>
    <div className='todo-content'>
-    { todos.map(todo=>
-      < Todo key={todo.id} todo = {todo} dispatchButton={dispatch} todoLength= {todos.length}/>)
+    { todos.map(todo=>{
+    return < Todo key={todo.id} todo = {todo} dispatchButton={dispatch} todoLength= {todos.length}/>
     }
+    )
+    }
+
     { todos.length>0 && 
     <div className='items-left'>
       <span> {todos.length} {todos.length===1?'item left':'items left'}</span>
-     <button> Clear Completed</button>
+     <button  onClick={clearAll}> Clear Completed</button>
     </div>}
 
 </div>
     <div className='todopart'>
-      <button> All</button>
+      <button onClick={()=>dispatch({type:ACTION.ALL})}> All</button>
       <button> Active</button>
-      <button> Completed</button>
+      <button onClick={seeCompleted}> Completed</button>
 
     </div>
     </div>
