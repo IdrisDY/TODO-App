@@ -11,7 +11,7 @@ function handleClick(){
 console.log(todo)
   return (
     <>
-    <div className = 'todo-main'>
+    <div className = 'todo-main' style={todo.filterClicked ==='complete'&& !todo.complete || todo.filterClicked ==='active'&& todo.complete?{display:'none'}:{display:'flex'}}>
     <div className='checktodo'>
    { !checkClick?<input type='radio' onClick={handleClick} />
   : <div className='check-cover' onClick={handleClick}>

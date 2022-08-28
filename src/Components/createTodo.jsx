@@ -8,7 +8,8 @@ export const ACTION = {
   DELETETODO:'deletetodo',
   CLEAR:'clearall',
   COMPLETE:'completed',
-  ALL:'seeall'
+  ALL:'seeall',
+ACTIVE:'active'
    }
 
 const Todos = () => {
@@ -33,9 +34,22 @@ const Todos = () => {
 case ACTION.DELETETODO:
   return todos.filter(todo=>todo.id !== action.payload.id);
   case ACTION.CLEAR:
-    return( todos.filter(todo=>!todo.complete)  )
-    case ACTION.COMPLETE: return( todos.filter(todo=>todo.complete)  )
-    case ACTION.ALL:return todos
+    return []
+    case ACTION.ALL:
+      return todos.map(todo=>{
+        return{...todo,filterClicked:'all'}
+    }
+      )
+    case ACTION.COMPLETE: 
+    return todos.map(todo=>{
+        return{...todo,filterClicked:'complete'}
+    }
+      )
+    case ACTION.ACTIVE:
+      return todos.map(todo=>{
+        return{...todo,filterClicked:'active'}      
+    }
+      )
   default:
     return todos
 }     
@@ -44,7 +58,9 @@ case ACTION.DELETETODO:
          return{
             id:Date.now(),
             name:name,
-            complete:false
+            complete:false,
+            filterClicked:'all'
+
          }
       }
       console.log(todos)
@@ -87,7 +103,7 @@ setNom('')
 </div>
     <div className='todopart'>
       <button onClick={()=>dispatch({type:ACTION.ALL})}> All</button>
-      <button> Active</button>
+      <button onClick={()=>dispatch({type:ACTION.ACTIVE})}> Active</button>
       <button onClick={seeCompleted}> Completed</button>
 
     </div>
