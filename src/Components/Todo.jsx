@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
-import check from '../assets/images/icon-check.svg'
-export const Todo = ({todo,dispatchButton,todoLength}) => {
+import { Draggable } from 'react-beautiful-dnd'
+export const Todo = ({todo,dispatchButton,innerRef,todoIndex}) => {
   const themes = useTheme()
   const [checkClick, setCheckClick]= useState(false)
 function handleClick(){
@@ -11,7 +11,7 @@ function handleClick(){
 console.log(todo)
   return (
     <>
-    <div className = 'todo-main' style={todo.filterClicked ==='complete'&& !todo.complete || todo.filterClicked ==='active'&& todo.complete?{display:'none'}:{display:'flex'}}>
+    <div ref={innerRef} className = 'todo-main' style={todo.filterClicked ==='complete'&& !todo.complete || todo.filterClicked ==='active'&& todo.complete?{display:'none'}:{display:'flex'}} draggable='true'>
     <div className='checktodo'>
    { !checkClick?<input type='radio' onClick={handleClick} />
   : <div className='check-cover' onClick={handleClick}>
@@ -23,6 +23,7 @@ console.log(todo)
 <button className='btnclose' onClick={()=> dispatchButton({type:'deletetodo',payload:{id:todo.id}})}>
  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill={themes.color} fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg> </button>
     </div>
+
     </>
   )
 }

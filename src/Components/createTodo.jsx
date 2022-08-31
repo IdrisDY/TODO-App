@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useReducer } from 'react'
 import { Todo } from './Todo'
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 export const ACTION = {
   ADDTODO:'addtodo',
   TOGGLETODO:'toggletodo',
@@ -34,7 +35,7 @@ const Todos = () => {
 case ACTION.DELETETODO:
   return todos.filter(todo=>todo.id !== action.payload.id);
   case ACTION.CLEAR:
-    return []
+    return todos.filter(todo=>!todo.complete)
     case ACTION.ALL:
       return todos.map(todo=>{
         return{...todo,filterClicked:'all'}
@@ -56,7 +57,7 @@ case ACTION.DELETETODO:
         }
       function newTodo(name){
          return{
-            id:Date.now(),
+            id: String (Date.now()),
             name:name,
             complete:false,
             filterClicked:'all'
@@ -87,13 +88,26 @@ setNom('')
       <input className='inputodo' type='text' value={nom} onChange={e=> setNom(e.target.value)} placeholder='Create a new Todo'/>
     </form>
 </div>
+<DragDropContext >
+<Droppable droppableId='chars'>
+   {provided=>(
+
    <div className='todo-content'>
-    { todos.map(todo=>{
-    return < Todo key={todo.id} todo = {todo} dispatchButton={dispatch} todoLength= {todos.length}/>
+
+<div {...provided.droppableProps} ref={provided.innerRef} provided={provided}>
+    { todos.map((todo,index)=>{
+    return   (    <Draggable draggableId={todo.id} key={todo.id} index={index} >
+     {provided=>(
+      
+    <Todo key={todo.id} innerRef={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}  todo = {todo} todoIndex={index} dispatchButton={dispatch} todoLength= {todos.length}/>
+    )}
+
+</Draggable>
+    )
     }
     )
     }
-
+    </div>
     { todos.length>0 && 
     <div className='items-left'>
       <span> {todos.length} {todos.length===1?'item left':'items left'}</span>
@@ -101,6 +115,11 @@ setNom('')
     </div>}
 
 </div>
+  )}
+
+</Droppable>
+
+</DragDropContext>
     <div className='todopart'>
       <button onClick={()=>dispatch({type:ACTION.ALL})}> All</button>
       <button onClick={()=>dispatch({type:ACTION.ACTIVE})}> Active</button>
