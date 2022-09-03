@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useReducer } from 'react'
 import { Todo } from './Todo'
@@ -12,9 +12,9 @@ export const ACTION = {
   ALL:'seeall',
 ACTIVE:'active'
    }
-
 const Todos = () => {
   const [nom, setNom]= useState('')
+
 
   const [todos, dispatch] = useReducer(reducer, []) 
 
@@ -78,7 +78,7 @@ setNom('')
         dispatch({type:ACTION.COMPLETE})
 
       }
-      function onEnd(todos,result){
+      function onEnd(result){
         console.log(result);
       }
       function reOrder(todos,startIndex,endIndex){
@@ -98,9 +98,11 @@ return rest
     </form>
 </div>
 <DragDropContext onDragEnd={onEnd}>
+<div className='todo-content' >
+
 <Droppable droppableId='chars'>
    {(provided,snapshot)=>(
-   <div className='todo-content' {...provided.droppableProps} ref={provided.innerRef}>
+    <div {...provided.droppableProps} ref={provided.innerRef}>
     { todos.map((todo,index)=>{
     return   (    
        <Todo key={todo.id}   todo = {todo} todoIndex={index} dispatchButton={dispatch} todoLength= {todos.length}/>
@@ -108,17 +110,19 @@ return rest
     }
     )
     }
+    {provided.placeholder}
+    </div>
+    )}
+
+</Droppable>
+
+
     { todos.length>0 && 
     <div className='items-left'>
       <span> {todos.length} {todos.length===1?'item left':'items left'}</span>
      <button  onClick={clearAll}> Clear Completed</button>
     </div>}
-{provided.placeholder}
 </div>
-
-  )}
-
-</Droppable>
 
 </DragDropContext>
     <div className='todopart'>

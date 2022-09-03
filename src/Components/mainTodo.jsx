@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import styled,{ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme, GlobalStyle } from './themes'
 import moon from '../assets/images/icon-moon.svg'
 import sun from '../assets/images/icon-sun.svg'
 import Todos from './createTodo'
-import { Todo } from './Todo'
+
 export const MainTodo = () => {
    const [theme, setTheme] = useState('light')
-   window.localStorage.setItem('theme', theme)
-   console.log(window.localStorage.getItem('theme'));
- 
+  //  console.log(window.localStorage.getItem('theme'));
+  useEffect(()=>{
+    window.localStorage.getItem('theme')
+  console.log(window.localStorage.getItem('theme'));
+  setTheme(window.localStorage.getItem('theme'))
+   },[])
+   useEffect(()=>{
+    window.localStorage.setItem('theme', theme)
+  console.log(window.localStorage.getItem('theme'));  
+   },[theme])
+
    const Styleddiv = styled.div`
       ${'' /* color:${props=>props.theme.color};
    background-color:${props=>props.theme.background}; */}

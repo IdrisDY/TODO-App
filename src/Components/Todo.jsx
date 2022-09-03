@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { useTheme } from 'styled-components'
 import { Draggable } from 'react-beautiful-dnd'
 export const Todo = ({todo,dispatchButton,innerRef,todoIndex}) => {
@@ -8,12 +8,12 @@ function handleClick(){
   checkClick?setCheckClick(false):setCheckClick(true)
   dispatchButton({type:'toggletodo', payload:{id:todo.id}})
 }
+
 console.log(todo)
   return (
-    <>
     <Draggable draggableId={todo.id} key={todo.id} index={todoIndex} >
     {(provided,snapshot)=>(
-    <div ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className = 'todo-main' style={todo.filterClicked ==='complete'&& !todo.complete || todo.filterClicked ==='active'&& todo.complete?{display:'none'}:{display:'flex'}}>
+    <div ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className = 'todo-main' style={todo.filterClicked ==='complete'&& !todo.complete || todo.filterClicked ==='active'&& todo.complete?{display:'none'}:{display:'flex'}} draggable='true'>
     <div className='checktodo'>
    { !checkClick?<input type='radio' onClick={handleClick} />
   : <div className='check-cover' onClick={handleClick}>
@@ -28,6 +28,5 @@ console.log(todo)
     )}
 </Draggable>
 
-    </>
   )
 }
