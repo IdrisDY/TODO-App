@@ -78,6 +78,15 @@ setNom('')
         dispatch({type:ACTION.COMPLETE})
 
       }
+      function onEnd(todos,result){
+        console.log(result);
+      }
+      function reOrder(todos,startIndex,endIndex){
+const rest = Array.from(todos)
+const [removed] = rest.splice(startIndex,1);
+rest.splice(endIndex,0,removed)
+return rest
+      }
      
   return (
    <div className='todo-inp-container'>
@@ -88,33 +97,25 @@ setNom('')
       <input className='inputodo' type='text' value={nom} onChange={e=> setNom(e.target.value)} placeholder='Create a new Todo'/>
     </form>
 </div>
-<DragDropContext >
+<DragDropContext onDragEnd={onEnd}>
 <Droppable droppableId='chars'>
-   {provided=>(
-
-   <div className='todo-content'>
-
-<div {...provided.droppableProps} ref={provided.innerRef} provided={provided}>
+   {(provided,snapshot)=>(
+   <div className='todo-content' {...provided.droppableProps} ref={provided.innerRef}>
     { todos.map((todo,index)=>{
-    return   (    <Draggable draggableId={todo.id} key={todo.id} index={index} >
-     {provided=>(
-      
-    <Todo key={todo.id} innerRef={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}  todo = {todo} todoIndex={index} dispatchButton={dispatch} todoLength= {todos.length}/>
-    )}
-
-</Draggable>
+    return   (    
+       <Todo key={todo.id}   todo = {todo} todoIndex={index} dispatchButton={dispatch} todoLength= {todos.length}/>
     )
     }
     )
     }
-    </div>
     { todos.length>0 && 
     <div className='items-left'>
       <span> {todos.length} {todos.length===1?'item left':'items left'}</span>
      <button  onClick={clearAll}> Clear Completed</button>
     </div>}
-
+{provided.placeholder}
 </div>
+
   )}
 
 </Droppable>
