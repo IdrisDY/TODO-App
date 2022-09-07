@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useReducer } from 'react'
 import { Todo } from './Todo'
+import Filters from './Filters'
 import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 export const ACTION = {
   ADDTODO:'addtodo',
@@ -14,9 +15,12 @@ ACTIVE:'active'
    }
 const Todos = () => {
   const [nom, setNom]= useState('')
-
-
+  const [width , setWidth] = useState(0)
+window.addEventListener('resize', ()=>{
+  setWidth(window.innerWidth);
+})
   const [todos, dispatch] = useReducer(reducer, []) 
+  const todoLengthy = todos.length > 0
 
        function reducer(todos, action){
         // here action is an object here  with a type prop
@@ -74,10 +78,6 @@ setNom('')
       function clearAll(){
         dispatch({type:ACTION.CLEAR})
       }
-      function seeCompleted (){
-        dispatch({type:ACTION.COMPLETE})
-
-      }
       function onEnd(result){
         console.log(result);
       }
@@ -98,7 +98,7 @@ return rest
     </form>
 </div>
 <DragDropContext onDragEnd={onEnd}>
-<div className='todo-content' >
+<div className='todo-content' style={{ boxShadow:todoLengthy?"4px 5px 15px 2px hsla(0, 0%, 0%, 0.34)":'none'}} >
 
 <Droppable droppableId='chars'>
    {(provided,snapshot)=>(
@@ -119,18 +119,15 @@ return rest
 
     { todos.length>0 && 
     <div className='items-left'>
-      <span> {todos.length} {todos.length===1?'item left':'items left'}</span>
+      <span style={{color:'hsl(236, 9%, 61%)'}}> {todos.length} {todos.length===1?'item left':'items left'}</span>
+      {todos.length>0 && width >= 990 && <Filters dispatch={dispatch} />}
+
      <button  onClick={clearAll}> Clear Completed</button>
     </div>}
 </div>
 
 </DragDropContext>
-    <div className='todopart'>
-      <button onClick={()=>dispatch({type:ACTION.ALL})}> All</button>
-      <button onClick={()=>dispatch({type:ACTION.ACTIVE})}> Active</button>
-      <button onClick={seeCompleted}> Completed</button>
-
-    </div>
+ {todos.length>0 && width <= 990 && <Filters dispatch={dispatch} style={{ boxShadow:"4px 5px 15px 2px hsla(0, 0%, 0%, 0.34)"}} />}
     </div>
   )
 }

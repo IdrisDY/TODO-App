@@ -24,6 +24,9 @@ export const MainTodo = () => {
    `;
    const Topdiv = styled.div`
    background-image: url(${props=>props.theme.mobgimage}) ;
+   @media(min-width:990px){
+    background-image: url(${props=>props.theme.deskimg}) ;
+   }
    `;
    function handleTheme(){
      theme==='light'?setTheme('dark'):setTheme('light')

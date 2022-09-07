@@ -9,7 +9,6 @@ function App() {
   return (
     <div className="App">
     <MainTodo/>
-    <CreateDroppable/>
     </div>
   )
 }
