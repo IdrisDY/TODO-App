@@ -10,12 +10,12 @@ const CreateDroppable = () => {
   return (
    <DragDropContext>
     <Droppable droppableId='list'>
-    {provided=>(
+    {(provided,snapshot)=>(
       <div {...provided.droppableProps} ref={provided.innerRef}>
 {ListArray.map((list,index )=>{
 return (
    <Draggable draggableId ={list.id} key={list.id} index={index}>
-   {provided=>(
+   {(provided,snapshot)=>(
       <div ref={provided.innerRef}{...provided.draggableProps}  {...provided.dragHandleProps} key={list.id} style={{color:list.color}}><span> {list.id}</span> {list.name} </div>
 )}
  </Draggable>
