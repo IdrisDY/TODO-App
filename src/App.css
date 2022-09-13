@@ -13,6 +13,7 @@ button{
   background:none ;
   border: none;
   color:hsl(236, 9%, 61%);
+  cursor: pointer;
 }
 .todo-top{
   background-repeat: no-repeat;
