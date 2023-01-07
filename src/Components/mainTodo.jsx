@@ -40,7 +40,7 @@ export const MainTodo = () => {
 
     <Topdiv className='todo-top'>  
     <div className='todo-top-toggle'> 
-    <p> TODO</p>
+    <p data-testid='count' > TODO</p>
 <button onClick ={handleTheme} > <img src= {theme==='light'?moon:sun} alt='toggle dark/light theme' />
 </button>
     </div>
